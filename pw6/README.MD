@@ -20,19 +20,19 @@
 
 ## Запуск програми
 
-## 1. --leak-check=no
+### 1. `--leak-check=no`
 
 Було виявлено:
 
-Use of uninitialised value — *b використовується без ініціалізації.
+`Use of uninitialised value` — `*b` використовується без ініціалізації.
 
-Invalid read — спроба читання з неініціалізованої/невалідної адреси.
+`Invalid read` — спроба читання з неініціалізованої/невалідної адреси.
 
-В результаті — програма аварійно завершується з SIGBUS.
+В результаті — програма аварійно завершується з `SIGBUS`.
 
 Було приховано:
 
-Valgrind не виводить інформацію про витік пам’яті, тобто виділена через malloc пам’ять не була проаналізована.
+`Valgrind` не виводить інформацію про витік пам’яті, тобто виділена через `malloc` пам’ять не була проаналізована.
 
 
 ``` 
@@ -68,15 +68,15 @@ Bus error
 lilpeep@avice:~/pw6 $ 
 ```
 
-## 2. --leak-check=summary
+### 2. `--leak-check=summary`
 
 Було виявлено:
 
 У зведенні про витоки пам’яті:
 
-still reachable: 40 bytes — пам’ять виділена через malloc, але не звільнена.
+`still reachable: 40 bytes` — пам’ять виділена через `malloc`, але не звільнена.
 
-Немає definitely lost, бо вказівник a все ще існує до завершення програми.
+Немає `definitely lost`, бо вказівник a все ще існує до завершення програми.
 
 Було приховано:
 
@@ -121,15 +121,15 @@ Bus error
 lilpeep@avice:~/pw6 $ 
 ```
 
-## 3. --track-origins=yes
+### 3. `--track-origins=yes`
 
 Було виявлено:
 
-Ті ж самі 2 помилки (uninitialised value і invalid read), але з точним місцем походження:
+Ті ж самі 2 помилки (`uninitialised value` і `invalid read`), але з точним місцем походження:
 
-Uninitialised value was created by a stack allocation — змінна b створена на рядку int *b;.
+`Uninitialised value was created by a stack allocation` — змінна `b` створена на рядку `int *b`;.
 
-Зведення по витоках також збережене (still reachable: 40 bytes).
+Зведення по витоках також збережене (`still reachable: 40 bytes`).
 
 Було приховано:
 
